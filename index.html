@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ChilkAi | Agentes de IA y automatización para empresas</title>
+<meta name="description" content="Diseñamos, construimos y operamos agentes de IA y automatizaciones conectados a los sistemas de tu empresa. Desde el sur de Chile, para empresas de cualquier mercado.">
+<link rel="canonical" href="https://chilkai.com/">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://chilkai.com/">
+<meta property="og:title" content="ChilkAi | Agentes de IA y automatización para empresas">
+<meta property="og:description" content="Agentes de IA que hacen el trabajo repetitivo de tu empresa.">
+<meta name="theme-color" content="#10231D">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2310231D'/%3E%3Cpath d='M32 14 Q22 18 14 30 Q24 25 32 24 Q40 25 50 30 Q42 18 32 14Z' fill='%23C4214B'/%3E%3Cpath d='M26 24 Q24 36 28 44 L36 44 Q40 36 38 24Z' fill='%238A4FC0'/%3E%3Cpath d='M32 44 L32 56 M29 44 L24 54 M35 44 L40 54' stroke='%23C4214B' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500&family=Schibsted+Grotesk:wght@500;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bosque: #10231D;
+    --bosque-2: #183A30;
+    --niebla: #EEF1EC;
+    --blanco: #F8FAF7;
+    --tinta: #1B2B26;
+    --tinta-2: #4A5C55;
+    --musgo: #A9BDB2;
+    --chilco: #C4214B;
+    --chilco-hover: #A51A3E;
+    --violeta: #5B2A86;
+    --violeta-claro: #8A4FC0;
+    --violeta-oscuro: #2E1545;
+
+    --sans: "Schibsted Grotesk", "Helvetica Neue", Arial, sans-serif;
+    --serif: "Newsreader", Georgia, "Times New Roman", serif;
+
+    --wrap: 1180px;
+    --gutter: clamp(1.25rem, 4vw, 2.5rem);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+  html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    background: var(--blanco);
+    color: var(--tinta);
+    font-family: var(--serif);
+    font-size: 1.125rem;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  img, svg { max-width: 100%; display: block; }
+  a { color: inherit; }
+  h1, h2, h3 { font-family: var(--sans); margin: 0; font-weight: 800; }
+  p { margin: 0; }
+
+  :focus-visible {
+    outline: 3px solid var(--chilco);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  .wrap { max-width: var(--wrap); margin: 0 auto; padding: 0 var(--gutter); }
+
+  .skip {
+    position: absolute; left: -999px; top: 0;
+    background: var(--chilco); color: #fff; padding: .6rem 1rem; z-index: 100;
+    font-family: var(--sans);
+  }
+  .skip:focus { left: 1rem; top: 1rem; }
+
+  /* ---------- Botones ---------- */
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center;
+    font-family: var(--sans); font-weight: 700; font-size: 1rem;
+    padding: .85rem 1.5rem; border-radius: 999px;
+    text-decoration: none; border: 2px solid transparent;
+    transition: background-color .15s ease, color .15s ease, border-color .15s ease;
+    white-space: nowrap;
+  }
+  .btn-primary { background: var(--chilco); color: #fff; }
+  .btn-primary:hover { background: var(--chilco-hover); }
+  .btn-ghost { border-color: rgba(238, 241, 236, .45); color: var(--niebla); }
+  .btn-ghost:hover { border-color: var(--niebla); background: rgba(238, 241, 236, .08); }
+
+  /* ---------- Navegación ---------- */
+  .nav {
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(16, 35, 29, .92);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(169, 189, 178, .15);
+  }
+  .nav .wrap {
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 1.5rem; height: 72px;
+  }
+  .logo {
+    display: flex; align-items: center; gap: .6rem;
+    text-decoration: none; color: var(--niebla);
+    font-family: var(--sans); font-weight: 800; font-size: 1.4rem; letter-spacing: -.02em;
+  }
+  .logo svg { width: 30px; height: 30px; }
+  .logo .ai { color: var(--musgo); font-weight: 500; }
+  .nav-links { display: flex; align-items: center; gap: 1.75rem; }
+  .nav-links a {
+    color: var(--musgo); text-decoration: none;
+    font-family: var(--sans); font-weight: 500; font-size: .95rem;
+  }
+  .nav-links a:hover { color: var(--niebla); }
+  .nav-actions { display: flex; align-items: center; gap: .75rem; }
+  .lang {
+    display: inline-flex; border: 1px solid rgba(169, 189, 178, .35); border-radius: 999px; padding: 3px;
+  }
+  .lang button {
+    font-family: var(--sans); font-weight: 700; font-size: .8rem;
+    background: none; border: 0; color: var(--musgo);
+    padding: .3rem .65rem; border-radius: 999px; cursor: pointer;
+  }
+  .lang button[aria-pressed="true"] { background: var(--niebla); color: var(--bosque); }
+  .nav .btn { padding: .55rem 1.1rem; font-size: .9rem; }
+
+  /* ---------- Hero ---------- */
+  .hero {
+    background: var(--bosque);
+    color: var(--niebla);
+    overflow: hidden;
+  }
+  .hero .wrap {
+    display: grid;
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, .85fr);
+    align-items: center;
+    gap: clamp(2rem, 5vw, 4rem);
+    padding-top: clamp(3.5rem, 8vw, 6.5rem);
+    padding-bottom: clamp(3.5rem, 8vw, 6rem);
+  }
+  .hero h1 {
+    font-size: clamp(2.6rem, 5.6vw, 4.6rem);
+    line-height: 1.02;
+    letter-spacing: -.035em;
+    max-width: 14ch;
+  }
+  .hero-sub {
+    margin-top: 1.75rem;
+    font-size: clamp(1.15rem, 1.6vw, 1.35rem);
+    line-height: 1.55;
+    color: #C9D6CE;
+    max-width: 46ch;
+  }
+  .hero-cta { margin-top: 2.25rem; display: flex; flex-wrap: wrap; gap: .85rem; }
+
+  .flower { width: 100%; max-width: 440px; margin-left: auto; }
+  .flower text {
+    font-family: var(--sans); font-weight: 700; font-size: 15px; fill: var(--niebla);
+  }
+  .flower .stamen {
+    stroke-dasharray: 320; stroke-dashoffset: 320;
+    animation: draw 1.4s cubic-bezier(.3,.7,.3,1) forwards;
+  }
+  .flower .node {
+    opacity: 0;
+    animation: appear .5s ease forwards;
+  }
+  .flower .s1 { animation-delay: .35s; } .flower .n1 { animation-delay: 1.25s; }
+  .flower .s2 { animation-delay: .45s; } .flower .n2 { animation-delay: 1.35s; }
+  .flower .s3 { animation-delay: .55s; } .flower .n3 { animation-delay: 1.45s; }
+  .flower .s4 { animation-delay: .65s; } .flower .n4 { animation-delay: 1.55s; }
+  .flower .s5 { animation-delay: .75s; } .flower .n5 { animation-delay: 1.65s; }
+  @keyframes draw { to { stroke-dashoffset: 0; } }
+  @keyframes appear { to { opacity: 1; } }
+
+  /* ---------- Secciones ---------- */
+  section { scroll-margin-top: 80px; }
+  .block { padding: clamp(4rem, 9vw, 7rem) 0; }
+  .block h2 {
+    font-size: clamp(2rem, 3.8vw, 3.1rem);
+    line-height: 1.05;
+    letter-spacing: -.03em;
+  }
+  .lead { margin-top: 1.25rem; color: var(--tinta-2); max-width: 40ch; font-size: 1.2rem; }
+
+  /* Qué hacemos */
+  .services { background: var(--niebla); }
+  .services .wrap {
+    display: grid;
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    gap: clamp(2.5rem, 6vw, 5rem);
+    align-items: start;
+  }
+  .services-head { position: sticky; top: 110px; }
+  .service-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 2.25rem; }
+  .service-list li {
+    display: grid;
+    grid-template-columns: 22px minmax(0, 1fr);
+    gap: 1.1rem;
+  }
+  .petal { width: 22px; height: 28px; margin-top: .2rem; }
+  .service-list h3 { font-size: 1.3rem; letter-spacing: -.01em; font-weight: 700; }
+  .service-list p { margin-top: .35rem; color: var(--tinta-2); max-width: 52ch; }
+
+  /* Cómo trabajamos */
+  .process { background: var(--blanco); }
+  .steps {
+    list-style: none; margin: 3.5rem 0 0; padding: 0;
+    display: grid; grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 2rem;
+    counter-reset: paso;
+  }
+  .steps li {
+    counter-increment: paso;
+    position: relative;
+    padding-top: 4.75rem;
+  }
+  .steps li::before {
+    content: counter(paso);
+    position: absolute; top: 0; left: 0;
+    font-family: var(--sans); font-weight: 800;
+    font-size: 4rem; line-height: 1;
+    color: transparent;
+    -webkit-text-stroke: 2px var(--violeta);
+  }
+  .steps li:not(:last-child)::after {
+    content: "";
+    position: absolute; top: 2rem; left: 3.5rem; right: -1rem;
+    height: 2px;
+    background: linear-gradient(to right, var(--violeta) 0 40%, transparent 40%) 0 0 / 10px 2px repeat-x;
+    opacity: .45;
+  }
+  .steps h3 { font-size: 1.3rem; font-weight: 700; }
+  .steps p { margin-top: .45rem; color: var(--tinta-2); }
+
+  /* Casos de uso */
+  .usecases { background: var(--bosque-2); color: var(--niebla); }
+  .usecases .lead { color: #C9D6CE; }
+  .case-list {
+    list-style: none; margin: 3rem 0 0; padding: 0;
+    display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: 3rem; row-gap: 0;
+  }
+  .case-list li {
+    display: flex; gap: 1rem; align-items: baseline;
+    padding: 1.15rem 0;
+    border-top: 1px solid rgba(169, 189, 178, .22);
+    font-family: var(--sans); font-weight: 500; font-size: 1.15rem;
+  }
+  .case-list li::before {
+    content: ""; flex: none;
+    width: 9px; height: 9px; border-radius: 50%;
+    background: var(--chilco);
+    transform: translateY(-2px);
+  }
+
+  /* Nombre */
+  .name { background: var(--niebla); }
+  .name .wrap {
+    display: grid; grid-template-columns: auto minmax(0, 1fr);
+    gap: clamp(1.5rem, 4vw, 3rem); align-items: center;
+    padding-top: clamp(3rem, 6vw, 4.5rem); padding-bottom: clamp(3rem, 6vw, 4.5rem);
+  }
+  .name svg { width: 88px; height: 110px; }
+  .name h2 { font-size: 1.5rem; letter-spacing: -.01em; }
+  .name p { margin-top: .5rem; color: var(--tinta-2); max-width: 62ch; font-size: 1.2rem; }
+
+  /* Contacto */
+  .contact { background: var(--violeta-oscuro); color: #fff; }
+  .contact .wrap {
+    display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between;
+    gap: 2rem;
+  }
+  .contact h2 { max-width: 18ch; }
+  .contact .lead { color: #D9CBE8; }
+
+  /* Footer */
+  footer {
+    background: var(--bosque); color: var(--musgo);
+    font-family: var(--sans); font-size: .9rem;
+  }
+  footer .wrap {
+    display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center;
+    gap: 1rem; padding-top: 1.75rem; padding-bottom: 1.75rem;
+  }
+  footer a { color: var(--niebla); text-decoration: none; }
+  footer a:hover { text-decoration: underline; }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width: 960px) {
+    .nav-links { display: none; }
+    .hero .wrap { grid-template-columns: 1fr; }
+    .flower { max-width: 340px; margin: 0 auto; }
+    .services .wrap { grid-template-columns: 1fr; }
+    .services-head { position: static; }
+    .steps { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 3rem; }
+    .steps li::after { display: none; }
+  }
+  @media (max-width: 600px) {
+    .nav .btn { display: none; }
+    .steps { grid-template-columns: 1fr; }
+    .case-list { grid-template-columns: 1fr; }
+    .name .wrap { grid-template-columns: 1fr; }
+    .name svg { width: 64px; height: 80px; }
+    .hero-cta .btn { flex: 1 1 100%; }
+    .contact .btn { width: 100%; white-space: normal; text-align: center; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .flower .stamen { animation: none; stroke-dashoffset: 0; }
+    .flower .node { animation: none; opacity: 1; }
+  }
+</style>
+</head>
+<body>
+<a class="skip" href="#main" data-i18n="skip">Saltar al contenido</a>
+
+<!-- Pétalo reutilizable para la lista de servicios -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="petal" viewBox="0 0 22 28">
+      <path d="M11 1 Q2 6 3 16 Q5 25 11 27 Q17 25 19 16 Q20 6 11 1Z" fill="currentColor"/>
+    </symbol>
+  </defs>
+</svg>
+
+<header class="nav">
+  <div class="wrap">
+    <a class="logo" href="#top" aria-label="ChilkAi, inicio">
+      <svg viewBox="0 0 64 64" aria-hidden="true">
+        <path d="M32 10 Q20 15 10 30 Q22 24 32 23 Q42 24 54 30 Q44 15 32 10Z" fill="#C4214B"/>
+        <path d="M25 23 Q23 37 27 46 L37 46 Q41 37 39 23Z" fill="#8A4FC0"/>
+        <path d="M32 46 L32 60 M28.5 46 L23 57 M35.5 46 L41 57" stroke="#C4214B" stroke-width="2.5" stroke-linecap="round"/>
+      </svg>
+      <span>chilk<span class="ai">ai</span></span>
+    </a>
+    <nav class="nav-links" aria-label="Principal">
+      <a href="#servicios" data-i18n="nav.services">Servicios</a>
+      <a href="#proceso" data-i18n="nav.process">Cómo trabajamos</a>
+      <a href="#casos" data-i18n="nav.cases">Casos de uso</a>
+      <a href="#contacto" data-i18n="nav.contact">Contacto</a>
+    </nav>
+    <div class="nav-actions">
+      <div class="lang" role="group" aria-label="Idioma / Language">
+        <button type="button" data-lang="es" aria-pressed="true">ES</button>
+        <button type="button" data-lang="en" aria-pressed="false">EN</button>
+      </div>
+      <a class="btn btn-primary" href="mailto:contacto@chilkai.com" data-i18n="cta.email">Escríbenos</a>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+  <!-- HERO -->
+  <section class="hero" id="top">
+    <div class="wrap">
+      <div>
+        <h1 data-i18n="hero.title">Agentes de IA que hacen el trabajo repetitivo de tu empresa.</h1>
+        <p class="hero-sub" data-i18n="hero.sub">Diseñamos, construimos y operamos agentes y automatizaciones conectados a los sistemas que ya usas. Trabajamos desde el sur de Chile con empresas de cualquier mercado.</p>
+        <div class="hero-cta">
+          <a class="btn btn-primary" href="mailto:contacto@chilkai.com" data-i18n="cta.email">Escríbenos</a>
+          <a class="btn btn-ghost" href="#servicios" data-i18n="hero.secondary">Ver servicios</a>
+        </div>
+      </div>
+
+      <!-- Chilco (Fuchsia magellanica) cuyos estambres se conectan a los sistemas de la empresa -->
+      <svg class="flower" viewBox="0 0 480 580" role="img" aria-labelledby="flowerTitle">
+        <title id="flowerTitle" data-i18n="hero.illustration">Flor de chilco cuyos estambres se conectan con ERP, CRM, correo, facturas y reportes</title>
+        <!-- tallo y hojas -->
+        <path d="M240 0 Q236 50 240 96" stroke="#5E8A72" stroke-width="5" fill="none" stroke-linecap="round"/>
+        <path d="M238 40 Q200 22 170 38 Q204 58 238 46Z" fill="#3F6B55"/>
+        <path d="M241 62 Q282 46 312 60 Q276 82 241 70Z" fill="#4E7D64"/>
+        <!-- tubo -->
+        <path d="M231 94 L249 94 L254 176 L226 176Z" fill="#C4214B"/>
+        <!-- sépalos -->
+        <path d="M240 168 Q180 170 128 240 Q192 204 240 196Z" fill="#C4214B"/>
+        <path d="M240 168 Q300 170 352 240 Q288 204 240 196Z" fill="#C4214B"/>
+        <path d="M236 172 Q198 196 178 262 Q214 222 244 204Z" fill="#A51A3E"/>
+        <path d="M244 172 Q282 196 302 262 Q266 222 236 204Z" fill="#A51A3E"/>
+        <!-- corola -->
+        <path d="M212 186 Q198 250 216 300 Q240 312 264 300 Q282 250 268 186Z" fill="#5B2A86"/>
+        <path d="M226 190 Q220 250 230 302" stroke="#8A4FC0" stroke-width="3" fill="none"/>
+        <path d="M254 190 Q260 250 250 302" stroke="#8A4FC0" stroke-width="3" fill="none"/>
+        <!-- estambres -> sistemas -->
+        <g stroke="#C4214B" stroke-width="2.5" fill="none" stroke-linecap="round">
+          <path class="stamen s1" d="M232 300 Q180 360 98 420"/>
+          <path class="stamen s2" d="M236 302 Q210 400 166 486"/>
+          <path class="stamen s3" d="M240 304 L240 540"/>
+          <path class="stamen s4" d="M244 302 Q270 400 314 486"/>
+          <path class="stamen s5" d="M248 300 Q300 360 382 420"/>
+        </g>
+        <g class="node n1">
+          <circle cx="98" cy="420" r="9" fill="#EEF1EC" stroke="#C4214B" stroke-width="3"/>
+          <text x="98" y="452" text-anchor="middle">ERP</text>
+        </g>
+        <g class="node n2">
+          <circle cx="166" cy="486" r="9" fill="#EEF1EC" stroke="#C4214B" stroke-width="3"/>
+          <text x="166" y="518" text-anchor="middle" data-i18n="node.email">Correo</text>
+        </g>
+        <g class="node n3">
+          <circle cx="240" cy="540" r="11" fill="#C4214B"/>
+          <text x="240" y="572" text-anchor="middle" data-i18n="node.invoices">Facturas</text>
+        </g>
+        <g class="node n4">
+          <circle cx="314" cy="486" r="9" fill="#EEF1EC" stroke="#C4214B" stroke-width="3"/>
+          <text x="314" y="518" text-anchor="middle" data-i18n="node.reports">Reportes</text>
+        </g>
+        <g class="node n5">
+          <circle cx="382" cy="420" r="9" fill="#EEF1EC" stroke="#C4214B" stroke-width="3"/>
+          <text x="382" y="452" text-anchor="middle">CRM</text>
+        </g>
+      </svg>
+    </div>
+  </section>
+
+  <!-- QUÉ HACEMOS -->
+  <section class="services block" id="servicios" aria-labelledby="servicesTitle">
+    <div class="wrap">
+      <div class="services-head">
+        <h2 id="servicesTitle" data-i18n="services.title">Qué hacemos</h2>
+        <p class="lead" data-i18n="services.lead">Tomamos un proceso que hoy consume horas de tu equipo y lo convertimos en un sistema que corre solo, con personas revisando donde importa.</p>
+      </div>
+      <ul class="service-list">
+        <li>
+          <svg class="petal" style="color:#C4214B" aria-hidden="true"><use href="#petal"/></svg>
+          <div>
+            <h3 data-i18n="s1.t">Agentes de IA</h3>
+            <p data-i18n="s1.d">Diseñamos, entrenamos, implementamos y operamos agentes autónomos o asistidos que leen documentos, responden, clasifican y ejecutan tareas.</p>
+          </div>
+        </li>
+        <li>
+          <svg class="petal" style="color:#5B2A86" aria-hidden="true"><use href="#petal"/></svg>
+          <div>
+            <h3 data-i18n="s2.t">Automatización de procesos</h3>
+            <p data-i18n="s2.d">Flujos que conectan tu ERP, CRM, correo y planillas para que nadie tenga que copiar información a mano.</p>
+          </div>
+        </li>
+        <li>
+          <svg class="petal" style="color:#C4214B" aria-hidden="true"><use href="#petal"/></svg>
+          <div>
+            <h3 data-i18n="s3.t">Datos y machine learning</h3>
+            <p data-i18n="s3.d">Procesamiento, análisis, almacenamiento y hospedaje de datos, y modelos de aprendizaje automático para proyectar y detectar anomalías.</p>
+          </div>
+        </li>
+        <li>
+          <svg class="petal" style="color:#5B2A86" aria-hidden="true"><use href="#petal"/></svg>
+          <div>
+            <h3 data-i18n="s4.t">Integración, nube y seguridad</h3>
+            <p data-i18n="s4.d">Integración de sistemas, infraestructura en la nube, ciberseguridad y soporte técnico.</p>
+          </div>
+        </li>
+        <li>
+          <svg class="petal" style="color:#C4214B" aria-hidden="true"><use href="#petal"/></svg>
+          <div>
+            <h3 data-i18n="s5.t">Operación por encargo</h3>
+            <p data-i18n="s5.d">Si prefieres no operarlo tú, nos hacemos cargo del proceso completo.</p>
+          </div>
+        </li>
+        <li>
+          <svg class="petal" style="color:#5B2A86" aria-hidden="true"><use href="#petal"/></svg>
+          <div>
+            <h3 data-i18n="s6.t">Software y plataformas</h3>
+            <p data-i18n="s6.d">Desarrollo y licenciamiento de software propio o de terceros, también en modalidad de suscripción.</p>
+          </div>
+        </li>
+        <li>
+          <svg class="petal" style="color:#C4214B" aria-hidden="true"><use href="#petal"/></svg>
+          <div>
+            <h3 data-i18n="s7.t">Consultoría</h3>
+            <p data-i18n="s7.d">Transformación digital, estrategia, logística, abastecimiento, comercio exterior, finanzas y control de costos.</p>
+          </div>
+        </li>
+        <li>
+          <svg class="petal" style="color:#5B2A86" aria-hidden="true"><use href="#petal"/></svg>
+          <div>
+            <h3 data-i18n="s8.t">Capacitación</h3>
+            <p data-i18n="s8.d">Cursos, talleres y contenidos para que tus equipos trabajen bien con IA.</p>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- CÓMO TRABAJAMOS -->
+  <section class="process block" id="proceso" aria-labelledby="processTitle">
+    <div class="wrap">
+      <h2 id="processTitle" data-i18n="process.title">Cómo trabajamos</h2>
+      <ol class="steps">
+        <li>
+          <h3 data-i18n="p1.t">Diagnóstico</h3>
+          <p data-i18n="p1.d">Mapeamos el proceso y medimos cuánto tiempo y dinero consume hoy.</p>
+        </li>
+        <li>
+          <h3 data-i18n="p2.t">Piloto</h3>
+          <p data-i18n="p2.d">Construimos un agente acotado sobre un caso real, con tus datos.</p>
+        </li>
+        <li>
+          <h3 data-i18n="p3.t">Implementación</h3>
+          <p data-i18n="p3.d">Lo conectamos a tus sistemas, con controles y registro de cada acción.</p>
+        </li>
+        <li>
+          <h3 data-i18n="p4.t">Operación</h3>
+          <p data-i18n="p4.d">Lo monitoreamos, lo mantenemos y lo ajustamos a medida que cambia tu negocio.</p>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- CASOS DE USO -->
+  <section class="usecases block" id="casos" aria-labelledby="casesTitle">
+    <div class="wrap">
+      <h2 id="casesTitle" data-i18n="cases.title">Procesos que se pueden automatizar</h2>
+      <p class="lead" data-i18n="cases.lead">Algunos ejemplos de dónde un agente ahorra más horas.</p>
+      <ul class="case-list">
+        <li data-i18n="c1">Conciliación de facturas, notas de crédito y guías de despacho</li>
+        <li data-i18n="c2">Control de tarifas de transporte y logística</li>
+        <li data-i18n="c3">Cotizaciones y respuestas a clientes</li>
+        <li data-i18n="c4">Reportes comerciales y de costos</li>
+        <li data-i18n="c5">Seguimiento de pedidos y embarques de exportación</li>
+        <li data-i18n="c6">Clasificación y respuesta de correos</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- NOMBRE -->
+  <section class="name" aria-labelledby="nameTitle">
+    <div class="wrap">
+      <svg viewBox="0 0 64 80" aria-hidden="true">
+        <path d="M32 0 L32 12" stroke="#5E8A72" stroke-width="2.5"/>
+        <path d="M29 12 L35 12 L36 24 L28 24Z" fill="#C4214B"/>
+        <path d="M32 22 Q18 24 8 38 Q20 31 32 30 Q44 31 56 38 Q46 24 32 22Z" fill="#C4214B"/>
+        <path d="M25 28 Q22 42 27 52 L37 52 Q42 42 39 28Z" fill="#5B2A86"/>
+        <path d="M32 52 L32 76 M29 52 L22 70 M35 52 L42 70" stroke="#C4214B" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+      <div>
+        <h2 id="nameTitle" data-i18n="name.title">¿Por qué ChilkAi?</h2>
+        <p data-i18n="name.d">El chilco es la fucsia nativa del bosque del sur de Chile. Le sumamos AI porque eso es lo que hacemos: tecnología hecha desde acá, para empresas de cualquier parte.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACTO -->
+  <section class="contact block" id="contacto" aria-labelledby="contactTitle">
+    <div class="wrap">
+      <div>
+        <h2 id="contactTitle" data-i18n="contact.title">Cuéntanos qué proceso le está quitando más tiempo a tu equipo.</h2>
+        <p class="lead" data-i18n="contact.lead">Te respondemos con una primera idea de cómo automatizarlo.</p>
+      </div>
+      <a class="btn btn-primary" href="mailto:contacto@chilkai.com?subject=Consulta%20desde%20chilkai.com" data-i18n="contact.btn">Escribir a contacto@chilkai.com</a>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span data-i18n="footer.legal">© 2026 ChilkAi SpA. Chile.</span>
+    <a href="mailto:contacto@chilkai.com">contacto@chilkai.com</a>
+  </div>
+</footer>
+
+<script>
+  const I18N = {
+    es: {
+      "skip": "Saltar al contenido",
+      "nav.services": "Servicios",
+      "nav.process": "Cómo trabajamos",
+      "nav.cases": "Casos de uso",
+      "nav.contact": "Contacto",
+      "cta.email": "Escríbenos",
+      "hero.title": "Agentes de IA que hacen el trabajo repetitivo de tu empresa.",
+      "hero.sub": "Diseñamos, construimos y operamos agentes y automatizaciones conectados a los sistemas que ya usas. Trabajamos desde el sur de Chile con empresas de cualquier mercado.",
+      "hero.secondary": "Ver servicios",
+      "hero.illustration": "Flor de chilco cuyos estambres se conectan con ERP, CRM, correo, facturas y reportes",
+      "node.email": "Correo",
+      "node.invoices": "Facturas",
+      "node.reports": "Reportes",
+      "services.title": "Qué hacemos",
+      "services.lead": "Tomamos un proceso que hoy consume horas de tu equipo y lo convertimos en un sistema que corre solo, con personas revisando donde importa.",
+      "s1.t": "Agentes de IA",
+      "s1.d": "Diseñamos, entrenamos, implementamos y operamos agentes autónomos o asistidos que leen documentos, responden, clasifican y ejecutan tareas.",
+      "s2.t": "Automatización de procesos",
+      "s2.d": "Flujos que conectan tu ERP, CRM, correo y planillas para que nadie tenga que copiar información a mano.",
+      "s3.t": "Datos y machine learning",
+      "s3.d": "Procesamiento, análisis, almacenamiento y hospedaje de datos, y modelos de aprendizaje automático para proyectar y detectar anomalías.",
+      "s4.t": "Integración, nube y seguridad",
+      "s4.d": "Integración de sistemas, infraestructura en la nube, ciberseguridad y soporte técnico.",
+      "s5.t": "Operación por encargo",
+      "s5.d": "Si prefieres no operarlo tú, nos hacemos cargo del proceso completo.",
+      "s6.t": "Software y plataformas",
+      "s6.d": "Desarrollo y licenciamiento de software propio o de terceros, también en modalidad de suscripción.",
+      "s7.t": "Consultoría",
+      "s7.d": "Transformación digital, estrategia, logística, abastecimiento, comercio exterior, finanzas y control de costos.",
+      "s8.t": "Capacitación",
+      "s8.d": "Cursos, talleres y contenidos para que tus equipos trabajen bien con IA.",
+      "process.title": "Cómo trabajamos",
+      "p1.t": "Diagnóstico",
+      "p1.d": "Mapeamos el proceso y medimos cuánto tiempo y dinero consume hoy.",
+      "p2.t": "Piloto",
+      "p2.d": "Construimos un agente acotado sobre un caso real, con tus datos.",
+      "p3.t": "Implementación",
+      "p3.d": "Lo conectamos a tus sistemas, con controles y registro de cada acción.",
+      "p4.t": "Operación",
+      "p4.d": "Lo monitoreamos, lo mantenemos y lo ajustamos a medida que cambia tu negocio.",
+      "cases.title": "Procesos que se pueden automatizar",
+      "cases.lead": "Algunos ejemplos de dónde un agente ahorra más horas.",
+      "c1": "Conciliación de facturas, notas de crédito y guías de despacho",
+      "c2": "Control de tarifas de transporte y logística",
+      "c3": "Cotizaciones y respuestas a clientes",
+      "c4": "Reportes comerciales y de costos",
+      "c5": "Seguimiento de pedidos y embarques de exportación",
+      "c6": "Clasificación y respuesta de correos",
+      "name.title": "¿Por qué ChilkAi?",
+      "name.d": "El chilco es la fucsia nativa del bosque del sur de Chile. Le sumamos AI porque eso es lo que hacemos: tecnología hecha desde acá, para empresas de cualquier parte.",
+      "contact.title": "Cuéntanos qué proceso le está quitando más tiempo a tu equipo.",
+      "contact.lead": "Te respondemos con una primera idea de cómo automatizarlo.",
+      "contact.btn": "Escribir a contacto@chilkai.com",
+      "footer.legal": "© 2026 ChilkAi SpA. Chile."
+    },
+    en: {
+      "skip": "Skip to content",
+      "nav.services": "Services",
+      "nav.process": "How we work",
+      "nav.cases": "Use cases",
+      "nav.contact": "Contact",
+      "cta.email": "Email us",
+      "hero.title": "AI agents that take on your company's repetitive work.",
+      "hero.sub": "We design, build and run agents and automations connected to the systems you already use. We work from southern Chile with companies in any market.",
+      "hero.secondary": "See services",
+      "hero.illustration": "A chilco flower whose stamens connect to ERP, CRM, email, invoices and reports",
+      "node.email": "Email",
+      "node.invoices": "Invoices",
+      "node.reports": "Reports",
+      "services.title": "What we do",
+      "services.lead": "We take a process that eats up your team's hours and turn it into a system that runs on its own, with people reviewing where it matters.",
+      "s1.t": "AI agents",
+      "s1.d": "We design, train, deploy and run autonomous or assisted agents that read documents, reply, classify and carry out tasks.",
+      "s2.t": "Process automation",
+      "s2.d": "Workflows that connect your ERP, CRM, email and spreadsheets so nobody has to copy data by hand.",
+      "s3.t": "Data and machine learning",
+      "s3.d": "Data processing, analysis, storage and hosting, plus machine learning models to forecast and flag anomalies.",
+      "s4.t": "Integration, cloud and security",
+      "s4.d": "Systems integration, cloud infrastructure, cybersecurity and technical support.",
+      "s5.t": "Managed operations",
+      "s5.d": "If you'd rather not run it yourself, we take over the whole process.",
+      "s6.t": "Software and platforms",
+      "s6.d": "Development and licensing of our own and third-party software, including subscription plans.",
+      "s7.t": "Consulting",
+      "s7.d": "Digital transformation, strategy, logistics, procurement, foreign trade, finance and cost control.",
+      "s8.t": "Training",
+      "s8.d": "Courses, workshops and content so your teams work well with AI.",
+      "process.title": "How we work",
+      "p1.t": "Assessment",
+      "p1.d": "We map the process and measure how much time and money it takes today.",
+      "p2.t": "Pilot",
+      "p2.d": "We build a focused agent on a real case, using your data.",
+      "p3.t": "Rollout",
+      "p3.d": "We connect it to your systems, with controls and a log of every action.",
+      "p4.t": "Operations",
+      "p4.d": "We monitor it, maintain it and adjust it as your business changes.",
+      "cases.title": "Processes you can automate",
+      "cases.lead": "A few places where an agent saves the most hours.",
+      "c1": "Reconciling invoices, credit notes and dispatch guides",
+      "c2": "Checking freight and logistics rates",
+      "c3": "Quotes and customer replies",
+      "c4": "Sales and cost reports",
+      "c5": "Tracking export orders and shipments",
+      "c6": "Sorting and answering email",
+      "name.title": "Why ChilkAi?",
+      "name.d": "Chilco is the native fuchsia of southern Chile's forests. We added AI because that's what we do: technology built here, for companies anywhere.",
+      "contact.title": "Tell us which process is taking up most of your team's time.",
+      "contact.lead": "We'll reply with a first take on how to automate it.",
+      "contact.btn": "Email contacto@chilkai.com",
+      "footer.legal": "© 2026 ChilkAi SpA. Chile."
+    }
+  };
+
+  const META = {
+    es: { title: "ChilkAi | Agentes de IA y automatización para empresas", subject: "Consulta desde chilkai.com" },
+    en: { title: "ChilkAi | AI agents and automation for enterprises", subject: "Inquiry from chilkai.com" }
+  };
+
+  function setLang(lang) {
+    const dict = I18N[lang] || I18N.es;
+    document.documentElement.lang = lang;
+    document.title = META[lang].title;
+    document.querySelectorAll("[data-i18n]").forEach(el => {
+      const key = el.getAttribute("data-i18n");
+      if (dict[key]) el.textContent = dict[key];
+    });
+    document.querySelectorAll('a[href^="mailto:"][href*="subject="]').forEach(a => {
+      a.href = "mailto:contacto@chilkai.com?subject=" + encodeURIComponent(META[lang].subject);
+    });
+    document.querySelectorAll(".lang button").forEach(b => {
+      b.setAttribute("aria-pressed", String(b.dataset.lang === lang));
+    });
+    try { localStorage.setItem("chilkai-lang", lang); } catch (e) {}
+  }
+
+  document.querySelectorAll(".lang button").forEach(b => {
+    b.addEventListener("click", () => setLang(b.dataset.lang));
+  });
+
+  (function initLang() {
+    let saved = null;
+    try { saved = localStorage.getItem("chilkai-lang"); } catch (e) {}
+    const browser = (navigator.language || "es").toLowerCase().startsWith("es") ? "es" : "en";
+    const lang = saved || browser;
+    if (lang !== "es") setLang(lang);
+  })();
+</script>
+</body>
+</html>
